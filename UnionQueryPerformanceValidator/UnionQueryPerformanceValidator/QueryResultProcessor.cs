@@ -24,7 +24,7 @@ namespace UnionQueryPerformanceValidator
 
         public void OrderBy()
         {
-           OrderedResultSet = ResultRowSet.OrderByDescending(o => o.PUID).ToList();
+           OrderedResultSet = ResultRowSet.OrderByDescending(o => o.PUID, StringComparer.Ordinal).ToList();
         }
 
         public override string ToString() => string.Join(",", OrderedResultSet.Select(o => o.PUID).ToArray());
