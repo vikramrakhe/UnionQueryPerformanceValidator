@@ -14,18 +14,19 @@ namespace UnionQueryPerformanceValidator
             _con.Open();
         }
 
-        public void ExecuteQuery(string sql, QueryResultProcessor mResult)
+        public List<string> ExecuteQuery(string sql)
         {
             OracleCommand command = _con.CreateCommand();
-            
+            var mResult = new List<string>();
             command.CommandText = sql;
             command.CommandType = CommandType.Text;
 
             OracleDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
-                mResult.AddToRowSet(new ResultRow(reader["PUID"].ToString()));
+                mResult.Add(reader["PUID"].ToString());
             }
+            return mResult;
         }
         
         public void Close()

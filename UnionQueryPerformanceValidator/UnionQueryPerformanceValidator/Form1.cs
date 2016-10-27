@@ -12,15 +12,15 @@ namespace UnionQueryPerformanceValidator
     {
         private OracleDatabaseConnection m_dbcon;
         private StringQueryStore m_queryStore;
-        private QueryResultProcessor m_resultParallelQuery;
-        private QueryResultProcessor m_resultUnionQuery;
+        private List<string> m_resultParallelQuery;
+        private List<string> m_resultUnionQuery;
         public Form1()
         {
             InitializeComponent();
             m_dbcon = new OracleDatabaseConnection();
             m_queryStore = new StringQueryStore();
-            m_resultParallelQuery = new QueryResultProcessor(); 
-            m_resultUnionQuery = new QueryResultProcessor();
+            m_resultParallelQuery = new List<string>();
+            m_resultUnionQuery = new List<string>();
             m_dbcon.Connect();
         }
 
@@ -37,7 +37,7 @@ namespace UnionQueryPerformanceValidator
         //Parallel Query Button
         private void button2_Click(object sender, EventArgs e)
         {
-            m_resultParallelQuery.Clear();
+            /*m_resultParallelQuery.Clear();
             parallelQueryText.Text = "";
 
             var sw = Stopwatch.StartNew();
@@ -51,39 +51,32 @@ namespace UnionQueryPerformanceValidator
             var totalexecutionTime = sw.Elapsed.TotalSeconds;
             TimeToExecute.Text = timeToExecute.ToString(CultureInfo.InvariantCulture);
             TimeToSort.Text = (totalexecutionTime - timeToExecute).ToString(CultureInfo.InvariantCulture);
-            parallelQueryText.Text = totalexecutionTime.ToString(CultureInfo.InvariantCulture);
+            parallelQueryText.Text = totalexecutionTime.ToString(CultureInfo.InvariantCulture);*/
 
-            /*var sw = Stopwatch.StartNew();
+            var sw = Stopwatch.StartNew();
             m_resultParallelQuery = m_queryStore.ReadQueriesFromStore().AsParallel()
-                .SelectMany(p => m_dbcon.ExecuteQuery(p)).ToList();
-
-            MessageBox.Show(string.Join(",\n", m_resultParallelQuery.Select(o => o.PUID).ToArray()), "Parallel Query Before Sort");
-
-            m_OrderedParallelQueryResult = m_resultParallelQuery.OrderBy(o => o.PUID).ToList();
-
-            MessageBox.Show(string.Join(",\n", m_OrderedParallelQueryResult.Select(o => o.PUID).ToArray()), "Parallel Query After Sort");
-            MessageBox.Show(
-                string.Join(",\n", m_resultParallelQuery.Select(o => o.PUID).ToArray())
-                    .Equals(string.Join(",\n", m_OrderedParallelQueryResult.Select(o => o.PUID).ToArray())).ToString());
+                .SelectMany(p => m_dbcon.ExecuteQuery(p)).OrderBy(o => o, StringComparer.Ordinal).ToList();
             sw.Stop();
             var totalexecutionTime = sw.Elapsed.TotalSeconds;
-            parallelQueryText.Text = totalexecutionTime.ToString(CultureInfo.InvariantCulture);*/
+            parallelQueryText.Text = totalexecutionTime.ToString(CultureInfo.InvariantCulture);
         }
 
         //Union Query Button
         private void button1_Click_1(object sender, EventArgs e)
         {
-            m_resultUnionQuery.Clear();
             unionQueryText.Text = "";
             var sw = Stopwatch.StartNew();
-            m_dbcon.ExecuteQuery(m_queryStore.ReadSingleUnionQuery(), m_resultUnionQuery);
+            m_resultUnionQuery = m_dbcon.ExecuteQuery(m_queryStore.ReadSingleUnionQuery());
+            sw.Stop();
             var executionTime = sw.Elapsed.TotalSeconds;
             unionQueryText.Text = executionTime.ToString(CultureInfo.InvariantCulture);
         }
 
         private void ComapareButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(m_resultParallelQuery.ToString().Equals(m_resultUnionQuery.GetString()).ToString());
+            var parallelQueryResultString = string.Join(",", m_resultParallelQuery.Select(o => o).ToArray());
+            var unionQueryResultString = string.Join(",", m_resultUnionQuery.Select(o => o).ToArray());
+            MessageBox.Show(parallelQueryResultString.Equals(unionQueryResultString).ToString());
         }
 
         private void Form1_Load(object sender, EventArgs e)
