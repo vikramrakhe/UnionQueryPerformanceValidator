@@ -83,15 +83,6 @@ namespace UnionQueryPerformanceValidator
 
         private void ComapareButton_Click(object sender, EventArgs e)
         {
-            var diff = m_resultParallelQuery.OrderedResultSet.Except(m_resultUnionQuery.ResultRowSet).ToList();
-
-            if (diff.Count > 0)
-            {
-                MessageBox.Show(string.Join(",", diff.Select(o => o.PUID).ToArray()), "Mismatch PUID's");
-            }
-
-            MessageBox.Show(m_resultParallelQuery.ToString(), "Parallel Query Sorted Result");
-            MessageBox.Show(m_resultUnionQuery.GetString(), "Union Query Sorted Result");
             MessageBox.Show(m_resultParallelQuery.ToString().Equals(m_resultUnionQuery.GetString()).ToString());
         }
 
