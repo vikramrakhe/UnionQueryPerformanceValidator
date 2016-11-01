@@ -34,13 +34,10 @@
             this.parallelQueryText = new System.Windows.Forms.TextBox();
             this.ComapareButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.TimeToExecute = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.TimeToSort = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -49,7 +46,7 @@
             // 
             this.ParallelQueryButton.Location = new System.Drawing.Point(12, 109);
             this.ParallelQueryButton.Name = "ParallelQueryButton";
-            this.ParallelQueryButton.Size = new System.Drawing.Size(232, 116);
+            this.ParallelQueryButton.Size = new System.Drawing.Size(232, 39);
             this.ParallelQueryButton.TabIndex = 1;
             this.ParallelQueryButton.Text = "Execute Parallel Queries";
             this.ParallelQueryButton.UseVisualStyleBackColor = true;
@@ -81,7 +78,7 @@
             // 
             // ComapareButton
             // 
-            this.ComapareButton.Location = new System.Drawing.Point(144, 250);
+            this.ComapareButton.Location = new System.Drawing.Point(148, 181);
             this.ComapareButton.Name = "ComapareButton";
             this.ComapareButton.Size = new System.Drawing.Size(232, 33);
             this.ComapareButton.TabIndex = 5;
@@ -98,47 +95,13 @@
             this.label1.TabIndex = 6;
             this.label1.Text = "Total Time Taken";
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(257, 159);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(129, 13);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "Time For Query Execution";
-            // 
-            // TimeToExecute
-            // 
-            this.TimeToExecute.Location = new System.Drawing.Point(134, 43);
-            this.TimeToExecute.Name = "TimeToExecute";
-            this.TimeToExecute.Size = new System.Drawing.Size(95, 20);
-            this.TimeToExecute.TabIndex = 7;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(257, 192);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(109, 13);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Time To Sort The List";
-            // 
-            // TimeToSort
-            // 
-            this.TimeToSort.Location = new System.Drawing.Point(134, 76);
-            this.TimeToSort.Name = "TimeToSort";
-            this.TimeToSort.Size = new System.Drawing.Size(95, 20);
-            this.TimeToSort.TabIndex = 9;
-            // 
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel1.Controls.Add(this.TimeToSort);
-            this.panel1.Controls.Add(this.TimeToExecute);
             this.panel1.Controls.Add(this.parallelQueryText);
             this.panel1.Location = new System.Drawing.Point(250, 113);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(245, 112);
+            this.panel1.Size = new System.Drawing.Size(245, 35);
             this.panel1.TabIndex = 11;
             // 
             // label4
@@ -157,24 +120,33 @@
             this.panel2.Controls.Add(this.unionQueryText);
             this.panel2.Location = new System.Drawing.Point(250, 59);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(244, 34);
+            this.panel2.Size = new System.Drawing.Size(244, 36);
             this.panel2.TabIndex = 13;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(117, 19);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(320, 20);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "Compare Union Query With Parallel Queries ";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(537, 295);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.label3);
+            this.ClientSize = new System.Drawing.Size(537, 224);
             this.Controls.Add(this.label2);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ComapareButton);
             this.Controls.Add(this.UnionQueryButton);
             this.Controls.Add(this.ParallelQueryButton);
             this.Controls.Add(this.panel1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Performance Validator Utility";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -192,13 +164,10 @@
         private System.Windows.Forms.TextBox parallelQueryText;
         private System.Windows.Forms.Button ComapareButton;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox TimeToExecute;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox TimeToSort;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label label2;
     }
 }
 
